@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script type="text/javascript" src="./javascripts/jquery.min.js"></script>
+</head>
+<body>
+  <div>
+    <div>合作商订单号</div>
+    <input type="number" placeholder="请输入查询的订单号" id="number">
+    <button type="sumbit" id="submit">查询</button>
+  </div>
+</body>
+</html>
+<script>
+$(function(){
+  $(document).keyup(function(event){
+    if(event.keyCode == 13){
+      $("#submit").trigger("click");
+    }
+  });
+  $('#submit').on('click', function(){
+    var number = $('#number').val();
+    var numberVal = $.trim(number)
+    if(numberVal.length==0){
+      alert('订单号不能为空')
+      return false;
+    }
+    
+    $.ajax({
+      url: '/partner/trade/findState',
+      type: 'POST',
+      dataType: 'json',
+      data: {
+        code: numberVal
+      },
+      success: function(res){
+        if(res != null && res.code) {
+          alert(res);
+        }
+      }
+    })
+
+  })
+})
+</script>
