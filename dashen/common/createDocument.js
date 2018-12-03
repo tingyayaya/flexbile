@@ -28,30 +28,33 @@ function format(data){
     for(var key in item){
       var s = item[key];
       if(key.match(/skf736/gi)){
-        var spaceStr = completion(s, 44)
+        var spaceStr = completion(s, 43)
 
-      }else if(key.match(/SKF826|SKF827|SKF829/gi)){
-        var spaceStr = completion(s, 9)
+      }else if(key.match(/SKF826|SKF829/gi)){
+        var spaceStr = completion(s, 8)
 
       }else if(key.match(/SKF828/gi)){
-        var spaceStr = completion(s, 16)
+        var spaceStr = completion(s, 15)
+
+      }else if(key.match(/SKF827/gi)){
+        var spaceStr = completion(s, 8, 'right')
 
       }else if(key.match(/SKF735/gi)){
         s = item[key].toString().replace(/^0/g,'');
-        var spaceStr = completion(parseInt(s), 9)
+        var spaceStr = completion(parseInt(s), 8)
 
       }else if(key.match(/SKF787/gi)){
         s = item[key].toString().replace(/^0/g,'');
-        var spaceStr = completion(parseInt(s), 10)
+        var spaceStr = completion(parseInt(s), 9)
 
       }else if(key.match(/SKF789/gi)){
-        var spaceStr = completion(s, 2)
+        var spaceStr = completion(s, 1)
 
       }else if(key.match(/SKF830/gi)){
-        var spaceStr = completion(s, 8)
+        var spaceStr = completion(s, 7)
 
       }else if(key.match(/SKF792/gi)){
-        var spaceStr = completion(s, 2)
+        var spaceStr = completion(s, 1)
 
       }else if(key.match(/SKF793/gi)){
         var spaceStr = completion(s, 3)
@@ -61,12 +64,12 @@ function format(data){
       }
       str += spaceStr
     }
-    return str;
+    return str.replace(/\s?$/g, '');
   })
   return arr.join('\r\n')
 }
 
-function completion(str, size){
+function completion(str, size, type){
   var len1 = 0;
 
   for(var i=0;i<str.toString().length; i++){
@@ -79,11 +82,17 @@ function completion(str, size){
   }
   
   var blankSpace = ' '
+  var blankSpaceStr = "";
   var len = size-len1;
   for(var i=0;i<len;i++){
-    str += blankSpace
+    blankSpaceStr += blankSpace
   }
-  return str;
+  if(type == 'right'){
+    str = blankSpaceStr + str;
+  }else{
+    str += blankSpaceStr
+  }
+  return str + ' ';
 }
 
 function createDocument(path, data){

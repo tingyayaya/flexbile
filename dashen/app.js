@@ -15,8 +15,8 @@ var rule = new schedule.RecurrenceRule();
 for(var i=1; i<60; i++){
   times.push(i)
 }
-rule.hour = times     //每小时执行一次
-//rule.second = times    //每秒执行一次
+//rule.hour = times     //每小时执行一次
+rule.second = times    //每秒执行一次
 //rule.minute = times    //每分钟执行一次
 
 schedule.scheduleJob(rule, function(){
