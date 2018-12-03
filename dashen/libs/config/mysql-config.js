@@ -31,17 +31,17 @@ const development = {
 
   //MYSQL数据库配置
   MYSQL: {
-      host: "chenksh.f3322.net",
-      user: "xiaoya",   //用户名密码
-      password: "123456",    //密码
-      port: "6000",        //端口
-      database: "chenkuserdb35",   //数据库名
+      host: "localhost",
+      user: "root",   //用户名密码
+      password: "",    //密码
+      port: "3308",        //端口
+      database: "chenkuserdb1",   //数据库名
       supportBigNumbers: true,
       multipleStatements: true,
       timezone: 'utc',
   }
 }
 
-const config = development
+const config = production
 
 module.exports = config
